@@ -5,10 +5,10 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 locals{
-    name = "diploma-project-vpc"
+    name = "gm-diploma-project-vpc"
     region = "eu-central-1"
 
-    name_short = "dp-vpc"
+    name_short = "gm-dp-vpc"
     region_short = "euce1"
 
     vpc_cidr = "10.0.0.0/18"

@@ -4,5 +4,5 @@ variable "region" {
 
 variable "bucket_name" {
     description = "Name of S3 bucket"
-    default    = "diploma-project-tf-states"
+    default    = "gm-diploma-project-tf-states"
 }

@@ -3,4 +3,4 @@
 *.tfstate.backup
 .terraform.tfstate.lock.info
 
-**/ .DS_Store
+.DS_Store

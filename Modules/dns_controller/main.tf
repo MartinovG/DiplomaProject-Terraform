@@ -18,14 +18,34 @@ locals {
 }
 
 resource "helm_release" "external_dns_helm" {
-    name = "external-dns"
-    repository = "https://kubernetes-sigs.github.io/external-dns/"
-    chart = "external-dns"
-    namespace  = "kube-system"
+    name = var.helm_release_name
+    repository = var.helm_repo_url
+    chart = var.helm_chart_name
+    namespace  = var.k8s_namespace
     version    = var.helm_chart_version
     cleanup_on_fail = true
     max_history = 10
 
-    set = local.external_dns_set
-  
+    set {
+        name = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+        value = aws_iam_role.external_dns.arn
+    }
+
+    dynamic "set" {
+        for_each = var.settings
+
+        content {
+            name  = set.key
+            value = set.value
+        }
+    }
+
+    dynamic "set_list" {
+        for_each = var.settings_list
+
+        content {
+            name  = set_list.key
+            value = set_list.value
+        }
+    }
 }

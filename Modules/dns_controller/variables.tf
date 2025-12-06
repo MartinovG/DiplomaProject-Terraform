@@ -16,6 +16,15 @@ variable "k8s_pod_labels" {
   default     = {}
 }
 
+variable "helm_release_name" {
+}
+
+variable "helm_repo_url" {
+}
+
+variable "helm_chart_name" {
+}
+
 variable "helm_chart_version" {
 }
 

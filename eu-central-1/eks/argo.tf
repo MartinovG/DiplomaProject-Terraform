@@ -23,7 +23,7 @@ locals {
 
           "alb.ingress.kubernetes.io/listen-ports" = jsonencode([{ "HTTP" = 80 }, { "HTTPS" = 443 }])
           "alb.ingress.kubernetes.io/ssl-redirect" = "443"
-          "alb.ingress.kubernetes.io/certificate-arn" = "arn:aws:acm:eu-central-1:787587782604:certificate/fccf9c36-31ad-429e-811c-004bc7bcfdb1"
+          "alb.ingress.kubernetes.io/certificate-arn" = data.aws_acm_certificate.argo.arn
         }
         tls = [{
           hosts = [local.argocd_hostname]

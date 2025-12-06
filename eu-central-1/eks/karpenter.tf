@@ -11,37 +11,7 @@ module "karpenter" {
 
     enable_metrics_server = true
     enable_karpenter = true
-    enable_kube_prometheus_stack = true
-
-    kube_prometheus_stack = {
-        set = [
-            {
-                name = "grafana.grafana\\.ini.unified_alerting.enabled"
-                value = "true"
-            },
-            {
-                name = "grafana.grafana\\.ini.alerting.enabled"
-                value = "false"
-            },
-            {
-                name = "grafana.persistence.enabled"
-                value = "false"
-            },
-            {
-                name = "grafana.grafana\\.ini.unified_alerting.disable_provisioning"
-                value = "true"
-            },
-            {
-                name = "grafana.grafana\\.ini.unified_alerting.admin_config_enabled"
-                value = "true"
-            },
-            {
-                name = "grafana.grafana\\.ini.unified_alerting.alertmanager_config_enabled"
-                value = "true"
-            }
-        ]
-    }
-
+    
     karpenter = {
         repository_username = data.aws_ecrpublic_authorization_token.token.user_name
         repository_password = data.aws_ecrpublic_authorization_token.token.password

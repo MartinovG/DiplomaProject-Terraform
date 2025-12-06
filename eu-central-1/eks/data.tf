@@ -40,3 +40,11 @@ data "aws_subnets" "eks_private_nodes" {
         values = [data.aws_vpc.current.id]
     }
 }
+
+data "aws_acm_certificate" "grafana" {
+  domain      = "grafana-gmdiplomaproject.elsys.itgix.eu"
+}
+
+data "aws_acm_certificate" "argo" {
+  domain      = "argocd-gmdiplomaproject.elsys.itgix.eu"
+}

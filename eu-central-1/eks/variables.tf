@@ -7,7 +7,7 @@ variable "vpc_name" {
 }
 
 variable "domain_names_public" {
-  default = []
+  default = ["elsys.itgix.eu"]
 }
 
 variable "domain_names_private" {

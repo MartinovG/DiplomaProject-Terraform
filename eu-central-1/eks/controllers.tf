@@ -43,3 +43,15 @@ module "alb_controller" {
         region = var.aws_region
     }
 }
+
+module "ack_rds_controller" {
+  source = "../../Modules/ack_rds_controller"
+  cluster_name = module.eks.cluster_name
+  aws_region = var.aws_region
+  helm_chart_name = "rds-chart"
+  helm_repo_url = "oci://public.ecr.aws/aws-controllers-k8s"
+  helm_release_name = "ack-rds-controller"
+
+  cluster_identity_oidc_issuer_url = module.eks.cluster_oidc_issuer_url
+  cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
+}

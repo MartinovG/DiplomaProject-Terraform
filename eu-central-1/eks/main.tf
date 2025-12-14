@@ -77,4 +77,8 @@ module "eks" {
             instance_types = ["t3.medium"]
         }
     }
+
+    node_security_group_tags = {
+        "karpenter.sh/discovery" = "gmDiplomaProject"
+    }
 }

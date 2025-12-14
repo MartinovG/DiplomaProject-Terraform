@@ -78,6 +78,12 @@ module "eks" {
         }
     }
 
+    access_entries = {
+        karpenter_nodes = {
+            principal_arn = data.aws_iam_role.karpenter_node.arn
+            type          = "EC2_LINUX"
+        }
+
     node_security_group_tags = {
         "karpenter.sh/discovery" = "gmDiplomaProject"
     }

@@ -48,3 +48,7 @@ data "aws_acm_certificate" "grafana" {
 data "aws_acm_certificate" "argo" {
   domain      = "argocd-gmdiplomaproject.elsys.itgix.eu"
 }
+
+data "aws_iam_role" "karpenter_node" {
+  name = "karpenter-gmDiplomaProject"
+}

@@ -81,14 +81,14 @@ module "eks" {
             max_size = 2
             desired_size = 2
 
-            instance_types = ["t3.medium"]
+            instance_types = ["t3.xlarge"]
         }
     }
 
     access_entries = {
         karpenter_nodes = {
             principal_arn = data.aws_iam_role.karpenter_node.arn
-            type          = "EC2_LINUX"
+            type = "EC2_LINUX"
         }
     }
 

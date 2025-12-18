@@ -23,7 +23,10 @@ locals {
       }
 
       persistence = {
-        enabled = false 
+        enabled = true 
+        storageClassName = "gp3"
+        size = "10Gi"
+        accessMode = ["ReadWriteOnce"]
     }
       
       "grafana.ini" = {
@@ -37,7 +40,19 @@ locals {
 
     prometheus = {
       prometheusSpec = {
-        storageSpec = {} 
+        storageSpec = {
+          volumeClaimTemplate = {
+            spec = {
+              storageClassName = "gp3"
+              accessModes = ["ReadWriteOnce"]
+              resources = {
+                requests = {
+                  storage = "20Gi"
+                }
+              }
+            }
+          }
+        } 
       }
     }
   }

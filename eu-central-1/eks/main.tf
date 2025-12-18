@@ -26,7 +26,7 @@ module "eks" {
     addons = {
         vpc-cni = {
             before_compute = true
-            #service_account_role_arn = module.vpc_cni_irsa.iam_policy_arn
+            service_account_role_arn = module.vpc_cni_irsa.arn
             most_recent = true
         }
         kube-proxy = {
@@ -37,6 +37,13 @@ module "eks" {
         coredns = {
             resolve_conflicts_on_update = "PRESERVE"
             resolve_conflicts_on_create = "OVERWRITE"
+            most_recent = true
+        }
+        aws-ebs-csi-driver = {
+            resolve_conflicts_on_update = "PRESERVE"
+            resolve_conflicts_on_create = "OVERWRITE"
+            preserve = true
+            service_account_role_arn = module.ebs_csi_irsa.arn
             most_recent = true
         }
     }

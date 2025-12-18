@@ -43,21 +43,6 @@ output "cluster_primary_security_group_id" {
   value       = module.eks.cluster_primary_security_group_id
 }
 
-output "kms_key_arn" {
-  description = "The Amazon Resource Name (ARN) of the key"
-  value       = module.eks.kms_key_arn
-}
-
-output "kms_key_id" {
-  description = "The globally unique identifier for the key"
-  value       = module.eks.kms_key_id
-}
-
-output "kms_key_policy" {
-  description = "The IAM resource policy set on the key"
-  value       = module.eks.kms_key_policy
-}
-
 output "cluster_security_group_arn" {
   description = "Amazon Resource Name (ARN) of the cluster security group"
   value       = module.eks.cluster_security_group_arn

@@ -45,6 +45,7 @@ data "aws_acm_certificate" "argo" {
   domain      = "argocd-gmdiplomaproject.elsys.itgix.eu"
 }
 
+#comment when making new cluster
 data "aws_iam_role" "karpenter_node" {
   name = "karpenter-gmDiplomaProject"
 }

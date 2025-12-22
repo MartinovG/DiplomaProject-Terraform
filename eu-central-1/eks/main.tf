@@ -84,7 +84,7 @@ module "eks" {
             instance_types = ["t3.xlarge"]
         }
     }
-
+    #comment when making new cluster
     access_entries = {
         karpenter_nodes = {
             principal_arn = data.aws_iam_role.karpenter_node.arn

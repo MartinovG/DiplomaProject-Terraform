@@ -51,22 +51,3 @@ module "ebs_csi_irsa" {
 
     tags = local.tags
 }
-
-module "external_secrets_irsa" {
-    source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-    version = "6.2.3"
-
-    name = "${local.name}-eso"
-    policies = {
-        policy = aws_iam_policy.external_secrets.arn
-    }
-
-    oidc_providers = {
-        main = {
-            provider_arn = module.eks.oidc_provider_arn
-            namespace_service_accounts = ["external-secrets:external-secrets"]
-        }
-    }
-
-    tags = local.tags
-}

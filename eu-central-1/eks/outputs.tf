@@ -152,8 +152,3 @@ output "rds_security_group_id" {
   description = "The ID of the RDS Security Group"
   value       = aws_security_group.rds_sg.id
 }
-
-output "external_secrets_role_arn" {
-  description = "ARN of the external secrets IAM role"
-  value       = module.external_secrets_irsa.arn
-}

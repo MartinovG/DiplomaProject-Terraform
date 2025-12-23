@@ -11,7 +11,7 @@ resource "aws_iam_policy" "external_secrets" {
           "secretsmanager:GetSecretValue",
           "secretsmanager:DescribeSecret"
         ]
-        Resource = "arn:aws:secretmanager:${data.aws_region.current.name}:secret:${data.aws_caller_identity.account_id}:secret:prod/gm-diploma/*"
+        Resource = "arn:aws:secretsmanager:${data.aws_region.current.name}:secret:${data.aws_caller_identity.current.account_id}:secret:prod/gm-diploma/*"
       }
     ]
   })

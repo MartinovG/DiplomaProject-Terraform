@@ -56,7 +56,7 @@ module "external_secrets_irsa" {
     source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
     version = "6.2.3"
 
-    name = "${local.name}-external-secrets-irsa"
+    name = "${local.name}-eso"
     policies = {
         policy = aws_iam_policy.external_secrets.arn
     }

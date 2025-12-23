@@ -155,5 +155,5 @@ output "rds_security_group_id" {
 
 output "external_secrets_role_arn" {
   description = "ARN of the external secrets IAM role"
-  value       = module.external_secrets_irsa.iam_role_arn
+  value       = module.external_secrets_irsa.arn
 }

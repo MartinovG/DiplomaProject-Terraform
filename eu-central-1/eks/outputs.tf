@@ -147,3 +147,13 @@ output "iam_role_unique_id" {
   description = "Unique ID of IAM role"
   value       = module.vpc_cni_irsa.unique_id
 }
+
+output "rds_security_group_id" {
+  description = "The ID of the RDS Security Group"
+  value       = aws_security_group.rds_sg.id
+}
+
+output "external_secrets_role_arn" {
+  description = "ARN of the external secrets IAM role"
+  value       = module.external_secrets_irsa.iam_role_arn
+}

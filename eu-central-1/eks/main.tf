@@ -96,3 +96,29 @@ module "eks" {
         "karpenter.sh/discovery" = "gmDiplomaProject"
     }
 }
+
+resource "aws_security_group" "rds_sg" {
+  name        = "gm-diploma-db-sg"
+  description = "Allow PostgreSQL traffic ONLY from EKS Nodes"
+  vpc_id      = data.aws_vpc.current.id
+
+  ingress {
+    description     = "PostgreSQL from EKS Nodes"
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+
+    security_groups = [module.eks.node_security_group_id] 
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "gm-diploma-db-sg"
+  }
+}

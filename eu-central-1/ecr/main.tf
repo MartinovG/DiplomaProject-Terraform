@@ -6,8 +6,6 @@ module "ecr_repos" {
 
     repository_name = each.value
 
-    repository_force_delete = true
-
     repository_image_tag_mutability = "MUTABLE"
 
     repository_read_access_arns = [module.github-oidc.iam_role_arn]

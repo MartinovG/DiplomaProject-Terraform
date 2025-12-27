@@ -1,8 +1,12 @@
-module "ecr_api" {
+module "ecr_repos" {
     source  = "terraform-aws-modules/ecr/aws"
     version = "3.1.0"
 
-    repository_name = "gm-diploma-project-ecr-repo-api"
+    for_each = var.repository_names
+
+    repository_name = each.value
+
+    repository_force_delete = true
 
     repository_image_tag_mutability = "MUTABLE"
 

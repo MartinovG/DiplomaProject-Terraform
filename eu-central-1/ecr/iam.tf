@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "oidc_policy" {
             "ecr:PutImage",
         ]
 
-        resources = [module.ecr_api.repository_arn]
+        resources = [for repo in module.ecr_repos : repo.repository_arn]
     }
 
     statement {

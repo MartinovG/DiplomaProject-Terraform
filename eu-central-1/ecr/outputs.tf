@@ -1,16 +1,16 @@
-output "repository_name" {
-  description = "The name of the repository"
-  value       = module.ecr_api.repository_name
+output "repository_names" {
+  description = "The names of the repositories"
+  value       = { for name, repo in module.ecr_repos : name => repo.repository_name }
 }
 
-output "repository_url" {
-  description = "The URL of the repository (for docker push)"
-  value       = module.ecr_api.repository_url
+output "repository_urls" {
+  description = "Map of repository names to their URLs"
+  value       = { for name, repo in module.ecr_repos : name => repo.repository_url }
 }
 
-output "repository_arn" {
-  description = "The ARN of the repository"
-  value       = module.ecr_api.repository_arn
+output "repository_arns" {
+  description = "Map of repository names to their ARNs"
+  value       = { for name, repo in module.ecr_repos : name => repo.repository_arn }
 }
 
 output "oidc_role_arn" {

@@ -1,4 +1,3 @@
-# 1. Create Namespace (if not kube-system)
 resource "kubernetes_namespace" "ack_system" {
   count = var.k8s_namespace != "kube-system" ? 1 : 0
   metadata {
@@ -25,7 +24,7 @@ data "aws_iam_policy_document" "ack_assume_role" {
 }
 
 resource "aws_iam_role" "ack_rds_controller" {
-  name               = "${var.cluster_name}-ack-rds-controller"
+  name  = "${var.cluster_name}-ack-rds-controller"
   assume_role_policy = data.aws_iam_policy_document.ack_assume_role.json
 }
 

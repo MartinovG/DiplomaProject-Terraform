@@ -128,24 +128,14 @@ output "self_managed_node_groups_autoscaling_group_names" {
   value       = module.eks.self_managed_node_groups_autoscaling_group_names
 }
 
-output "iam_role_arn" {
-  description = "ARN of IAM role"
+output "vpc_cni_irsa_role_arn" {
+  description = "ARN of the VPC CNI IRSA role"
   value       = module.vpc_cni_irsa.arn
 }
 
-output "iam_role_name" {
-  description = "Name of IAM role"
-  value       = module.vpc_cni_irsa.name
-}
-
-output "iam_role_path" {
-  description = "Path of IAM role"
-  value       = module.vpc_cni_irsa.path
-}
-
-output "iam_role_unique_id" {
-  description = "Unique ID of IAM role"
-  value       = module.vpc_cni_irsa.unique_id
+output "external_secrets_irsa_role_arn" {
+  description = "ARN of the External Secrets Operator IRSA role"
+  value       = module.external_secrets_irsa.arn
 }
 
 output "rds_security_group_id" {

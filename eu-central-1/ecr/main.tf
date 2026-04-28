@@ -6,7 +6,7 @@ module "ecr_repos" {
 
     repository_name = each.value
 
-    repository_image_tag_mutability = "MUTABLE"
+    repository_image_tag_mutability = "IMMUTABLE"
 
     repository_read_access_arns = [module.github-oidc.iam_role_arn]
 
@@ -16,9 +16,9 @@ module "ecr_repos" {
                 rulePriority = 1
                 description  = "Keep last 10 images"
                 selection = {
-                    tagStatus    = "untagged"
-                    countType    = "imageCountMoreThan"
-                    countNumber  = 10
+                    tagStatus   = "any"
+                    countType   = "imageCountMoreThan"
+                    countNumber = 10
                 }
                 action = {
                     type = "expire"

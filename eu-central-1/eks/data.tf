@@ -29,17 +29,6 @@ data "aws_subnets" "eks_private" {
     }
 }
 
-data "aws_subnets" "eks_private_nodes" {
-    filter {
-        name = "tag:Name"
-        values = ["${var.eks_private_nodes_subnet_names}"]
-    }
-
-    filter {
-        name = "vpc-id"
-        values = [data.aws_vpc.current.id]
-    }
-}
 
 data "aws_acm_certificate" "argo" {
   domain      = "argocd-gmdiplomaproject.elsys.itgix.eu"

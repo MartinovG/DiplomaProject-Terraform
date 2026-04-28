@@ -18,6 +18,10 @@ variable "eks_private_subnet_names" {
  default = "gm-dp-vpc-private-euce1"
 }
 
-variable "eks_private_nodes_subnet_names" {
-  default = "gm-dp-vpc-private-euce1-nodes"
+
+variable "eks_public_access_cidrs" {
+  description = "CIDR blocks allowed to reach the EKS public API endpoint."
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
 }
+

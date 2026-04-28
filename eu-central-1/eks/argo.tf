@@ -4,8 +4,9 @@ locals {
   argocd_values = {
     configs = {
       params = {
-        "server.insecure"        = true
-        "application.namespaces" = "*"
+        "server.insecure"             = true
+        "application.namespaces"      = "*"
+        "controller.diff.server.side" = "true"
       }
     }
     
@@ -36,8 +37,8 @@ locals {
     
     controller = {
       resources = {
-        requests = { cpu = "50m", memory = "64Mi" }
-        limits   = { cpu = "500m", memory = "512Mi" }
+        requests = { cpu = "50m", memory = "256Mi" }
+        limits   = { cpu = "1", memory = "2Gi" }
       }
     }
     
@@ -54,7 +55,7 @@ resource "helm_release" "argocd" {
   name             = "argo-cd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
-  version          = "9.3.4" 
+  version          = "9.5.4"
   namespace        = "argocd"
   create_namespace = true
   cleanup_on_fail  = true

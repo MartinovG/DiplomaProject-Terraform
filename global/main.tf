@@ -10,19 +10,13 @@ resource "aws_s3_bucket_versioning" "versioning" {
   }
 }
 
-resource "aws_s3_bucket_ownership_controls" "ownership" {
+resource "aws_s3_bucket_public_access_block" "state" {
   bucket = aws_s3_bucket.bucket.id
 
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-resource "aws_s3_bucket_acl" "acl" {
-depends_on = [aws_s3_bucket_ownership_controls.ownership]
-
-  bucket = aws_s3_bucket.bucket.id
-  acl    = "private"
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_dynamodb_table" "terraform_state_lock" {
@@ -31,13 +25,12 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
     type = "S"
   }
 
-  hash_key = "LockID"
-  name    = "${var.bucket_name}-lock-table"
-  read_capacity = 1
-  write_capacity = 1
+  hash_key     = "LockID"
+  name         = "${var.bucket_name}-lock-table"
+  billing_mode = "PAY_PER_REQUEST"
 
   tags = {
     description = "DynamoDB table for Terraform state locking"
-    Terraform = "true"
+    Terraform   = "true"
   }
 }

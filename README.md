@@ -31,7 +31,7 @@ Infrastructure for a Kubernetes-based deployment platform on AWS, built as a dip
 - All controllers use IRSA (per-service-account IAM roles via OIDC)
 - Secrets Manager entries: Grafana admin creds, Alertmanager config, preview DB credentials
 
-**State backend (global)**
+**State backend**
 - S3 bucket with versioning, fully blocked public access
 - DynamoDB table for state locking
 
@@ -43,7 +43,7 @@ Infrastructure for a Kubernetes-based deployment platform on AWS, built as a dip
 ## Repository layout
 
 ```
-global/               # S3 + DynamoDB for Terraform state
+backend/              # S3 + DynamoDB for Terraform state
 eu-central-1/
   vpc/                # VPC, subnets, NAT gateways
   acm/                # ACM certificate for *.elsys.itgix.eu
@@ -99,7 +99,7 @@ Monitoring (Prometheus + Grafana + Loki + Tempo + Alloy) is deployed as a separa
 
 ```bash
 # 1. Bootstrap state backend
-cd global && terraform init && terraform apply
+cd backend && terraform init && terraform apply
 
 # 2. Network
 cd eu-central-1/vpc && terraform init && terraform apply

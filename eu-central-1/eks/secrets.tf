@@ -18,3 +18,10 @@ resource "aws_secretsmanager_secret" "preview_db" {
 
     tags = local.tags
 }
+
+resource "aws_secretsmanager_secret" "prod_db" {
+    name                    = "gm-diploma-project/prod-db"
+    recovery_window_in_days = 0
+
+    tags = local.tags
+}

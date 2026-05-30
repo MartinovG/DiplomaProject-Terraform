@@ -25,3 +25,10 @@ resource "aws_secretsmanager_secret" "prod_db" {
 
     tags = local.tags
 }
+
+resource "aws_secretsmanager_secret" "github_token" {
+    name                    = "gm-diploma-project/github-token"
+    recovery_window_in_days = 0
+
+    tags = local.tags
+}

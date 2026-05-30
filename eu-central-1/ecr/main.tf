@@ -14,11 +14,39 @@ module "ecr_repos" {
         rules = [
             {
                 rulePriority = 1
-                description  = "Keep last 10 images"
+                description  = "Expire PR preview images after 14 days"
                 selection = {
-                    tagStatus   = "any"
-                    countType   = "imageCountMoreThan"
-                    countNumber = 10
+                    tagStatus     = "tagged"
+                    tagPrefixList = ["backend-pr-", "frontend-pr-"]
+                    countType     = "sinceImagePushed"
+                    countUnit     = "days"
+                    countNumber   = 14
+                }
+                action = {
+                    type = "expire"
+                }
+            },
+            {
+                rulePriority = 2
+                description  = "Keep last 30 prod (SHA-tagged) images"
+                selection = {
+                    tagStatus     = "tagged"
+                    tagPrefixList = ["backend-sha-", "frontend-sha-"]
+                    countType     = "imageCountMoreThan"
+                    countNumber   = 30
+                }
+                action = {
+                    type = "expire"
+                }
+            },
+            {
+                rulePriority = 3
+                description  = "Expire untagged images after 1 day"
+                selection = {
+                    tagStatus   = "untagged"
+                    countType   = "sinceImagePushed"
+                    countUnit   = "days"
+                    countNumber = 1
                 }
                 action = {
                     type = "expire"

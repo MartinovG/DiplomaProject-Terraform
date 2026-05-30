@@ -4,7 +4,7 @@ Infrastructure for a Kubernetes-based deployment platform on AWS, built as a dip
 
 - **This repo** — Terraform (VPC, EKS, controllers, secrets, ECR, ACM)
 - [DiplomaProject-ArgoCD](https://github.com/MartinovG/DiplomaProject-ArgoCD) — GitOps configs, Helm charts, monitoring manifests
-- [DiplomaProject-App](https://github.com/MartinovG/DiplomaProject-App) — Next.js frontend + Express/Prisma backend
+- [DiplomaProject-App](https://github.com/MartinovG/DiplomaProject-App) — Next.js frontend + Express backend (Kubernetes API client)
 
 ---
 
@@ -74,7 +74,7 @@ ArgoCD ApplicationSet (pullRequest generator)
         │
         ├── creates namespace pr-{N}
         ├── deploys frontend + backend from ECR (tag: backend-pr-{N})
-        ├── provisions isolated RDS DB via ACK (gm-diplomaproject-db-pr-{N})
+        ├── spins up an ephemeral in-cluster Postgres pod (no RDS for previews — cost)
         └── exposes at https://pr-{N}.elsys.itgix.eu
 
 PR merged to main

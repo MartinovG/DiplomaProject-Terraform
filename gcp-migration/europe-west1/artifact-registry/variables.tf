@@ -21,3 +21,8 @@ variable "repository_ids" {
         "dp-gcp-migration-artifact-registry-api"
         ]
 }
+
+variable "wif_name" {
+    description = "Workload Identity Federation for GitHub Actions"
+    default     = "dp-gcp-migration-wif"
+}

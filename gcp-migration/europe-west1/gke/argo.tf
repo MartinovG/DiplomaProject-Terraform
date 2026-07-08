@@ -1,8 +1,3 @@
-resource "google_compute_global_address" "argocd_ip" {
-  name         = "argocd-global-ip"
-  project      = var.project_id
-}
-
 locals {  
   argocd_values = {
     configs = {
@@ -16,24 +11,13 @@ locals {
     server = {
 
         service = {
-          type = "ClusterIP"
-          annotations = {
-            "cloud.google.com/neg" = "{\"ingress\": true}"
-          }
+          type = "LoadBalancer"
         }
 
-      ingress = {
-        enabled          = true
-        ingressClassName = "gce"
-        annotations = {
-          "kubernetes.io/ingress.class" = "gce"
-          "kubernetes.io/ingress.global-static-ip-name" = google_compute_global_address.argocd_ip.name
+        resources = {
+            requests = { cpu = "50m", memory = "64Mi" }
+            limits   = { cpu = "200m", memory = "256Mi" }
         }
-      }
-      resources = {
-        requests = { cpu = "50m", memory = "64Mi" }
-        limits   = { cpu = "200m", memory = "256Mi" }
-      }
     }
     
     controller = {

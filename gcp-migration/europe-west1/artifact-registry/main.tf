@@ -11,8 +11,7 @@ module "artifact_registry" {
   location   = var.region
   format     = var.format
 
-  for_each = var.repository_ids
-  repository_id = each.value
+  repository_id = "gm-diploma-project"
 
   docker_config = {
     immutable_tags = true
@@ -45,5 +44,10 @@ module "artifact_registry" {
     }
   }
 }
+
+members = {
+  writers = [module.github_ci_sa.iam_email]
+}
+
 }
 

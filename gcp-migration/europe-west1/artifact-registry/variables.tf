@@ -1,6 +1,6 @@
 variable "project_id" {
     description = "GCP project ID"
-    default     = "playground-s-11-6957cfc9"
+    default     = "playground-s-11-a2f0baaf"
 }
 
 variable "region" {
@@ -13,16 +13,16 @@ variable "format" {
     default     = "DOCKER"
 }
 
-variable "repository_ids" {
-    description = "Artifact Registry repository IDs"
-    type        = set(string)
-    default     = [
-        "dp-gcp-migration-artifact-registry-frontend",
-        "dp-gcp-migration-artifact-registry-api"
-        ]
+variable "github_owner" {
+    type        = string
+    default    = "MartinovG"
 }
 
-variable "wif_name" {
-    description = "Workload Identity Federation for GitHub Actions"
-    default     = "dp-gcp-migration-wif"
+variable "github_repositories" {
+    type        = set(string)
+    default     = [
+        "DiplomaProject-Terraform",
+        "DiplomaProject-App",
+        "DiplomaProject-ArgoCD"
+    ]
 }

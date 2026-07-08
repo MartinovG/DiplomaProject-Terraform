@@ -1,6 +1,6 @@
 variable "project_id" {
     description = "GCP project ID"
-    default     = "playground-s-11-6957cfc9"
+    default     = "playground-s-11-a2f0baaf"
 }
 
 variable "region" {

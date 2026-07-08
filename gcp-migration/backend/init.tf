@@ -6,7 +6,7 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    bucket      = "dp-gcp-migration-tf-state"
+    bucket      = "dp-gc-migration-tf-state"
     prefix      = "global/backend.tfstate"
   }
 }

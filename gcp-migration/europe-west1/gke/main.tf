@@ -1,4 +1,5 @@
 data "google_client_config" "default" {}
+data "google_compute_default_service_account" "default_sa" {}
 
 provider "google" {
     project = var.project_id    
@@ -17,6 +18,12 @@ module "gke" {
     subnetwork = "gm-dp-migration"
 
     ip_range_pods = "gke-pods"
+    ip_range_services = "gke-services"
+
+    create_service_account = false
+    service_account = data.google_compute_default_service_account.default_sa.email
+
+    deletion_protection = false
 
     node_pools = [
         {

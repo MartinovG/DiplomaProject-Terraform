@@ -12,7 +12,7 @@ module "github_wif" {
     "attribute.repository_owner" = "assertion.repository_owner"
   }
 
-  attribute_condition = "assertion.repository.owner == \"${var.github_owner}\""
+  attribute_condition = "assertion.repository_owner == \"${var.github_owner}\""
 
   sa_mapping = {
     for repo in var.github_repositories :

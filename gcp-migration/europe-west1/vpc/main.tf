@@ -24,11 +24,11 @@ module "vpc" {
         gm-dp-migration = [
             {
                 range_name    = "gke-pods"
-                ip_cidr_range = "10.1.0.0/24"
+                ip_cidr_range = "10.1.0.0/16"
             },
             {
                 range_name    = "gke-services"
-                ip_cidr_range = "10.2.0.0/24"
+                ip_cidr_range = "10.2.0.0/16"
             }
         ]
     }

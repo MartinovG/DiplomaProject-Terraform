@@ -4,7 +4,7 @@ variable "region" {
 
 variable "project_id" {
     description = "GCP project ID"
-    default     = "playground-s-11-a2f0baaf"
+    default     = "playground-s-11-6cf436aa"
 }
 
 variable "vpc_name" {

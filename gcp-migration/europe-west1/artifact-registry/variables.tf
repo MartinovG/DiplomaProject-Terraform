@@ -1,6 +1,6 @@
 variable "project_id" {
     description = "GCP project ID"
-    default     = "playground-s-11-a2f0baaf"
+    default     = "playground-s-11-6cf436aa"
 }
 
 variable "region" {
@@ -21,8 +21,8 @@ variable "github_owner" {
 variable "github_repositories" {
     type        = set(string)
     default     = [
-        "DiplomaProject-Terraform",
-        "DiplomaProject-App",
-        "DiplomaProject-ArgoCD"
+        "MartinovG/DiplomaProject-Terraform",
+        "MartinovG/DiplomaProject-App",
+        "MartinovG/DiplomaProject-ArgoCD"
     ]
 }

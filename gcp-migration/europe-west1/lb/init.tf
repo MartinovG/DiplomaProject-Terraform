@@ -1,6 +1,6 @@
 terraform {
     backend "gcs" {
       bucket      = "dp-gc-migrations-tf-state-2"
-      prefix      = "europe-west1/vpc.tfstate"
+      prefix      = "europe-west1/lb.tfstate"
     }
 }

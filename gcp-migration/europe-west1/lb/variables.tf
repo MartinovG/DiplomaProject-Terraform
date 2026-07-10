@@ -6,10 +6,3 @@ variable "project_id" {
 variable "region" {
     default = "europe-west1"
 }
-
-variable "cluster_name" {
-    description = "GKE cluster name"
-    default     = "dp-gcp-migration-gke"
-}
-
-

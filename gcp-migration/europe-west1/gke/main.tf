@@ -25,6 +25,8 @@ module "gke" {
 
     deletion_protection = false
 
+    gateway_api_channel = "CHANNEL_STANDARD"
+
     node_pools = [
         {
             name         = "default-node-pool"

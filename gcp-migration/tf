@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# ./tf <stack> <terraform-команда> [args...]
+#
+#   ./tf backend init && ./tf backend apply     # локален state
+#   ./tf vpc init && ./tf vpc apply
+#   ./tf gke output -raw ...
+#
+# Декларативният слепител: backend блокът в Terraform НЕ приема
+# променливи (резолва се преди тях), затова стойностите се подават
+# тук на init (partial backend config). Всичко останало минава през
+# TF_VAR_* — stack-овете си вземат каквото декларират, останалото
+# се игнорира тихо.
+set -euo pipefail
+cd "$(dirname "$0")"
+source ./env.sh
+
+STACK="${1:?usage: ./tf <backend|vpc|gke|artifact-registry|lb> <cmd> [args]}"
+shift
+
+case "$STACK" in
+  backend)              DIR="backend" ;;
+  vpc)                  DIR="europe-west1/vpc" ;;
+  gke)                  DIR="europe-west1/gke" ;;
+  artifact-registry|ar) DIR="europe-west1/artifact-registry"; STACK="artifact-registry" ;;
+  lb)                   DIR="europe-west1/lb" ;;
+  *) echo "unknown stack: $STACK"; exit 1 ;;
+esac
+
+export TF_VAR_project_id="$PROJECT_ID"
+export TF_VAR_region="$REGION"
+export TF_VAR_cluster_name="$CLUSTER_NAME"
+
+CMD="${1:?terraform command required}"
+shift || true
+cd "$DIR"
+
+if [[ "$CMD" == "init" ]]; then
+  if [[ "$STACK" == "backend" ]]; then
+    # backend stack-ът създава bucket-а -> локален state (нарочно
+    # няма terraform{backend} блок): кокошката и яйцето е счупено
+    terraform init "$@"
+  else
+    # -reconfigure: при sandbox ротация .terraform/ кешира стария
+    # bucket и без този флаг init отказва да го смени
+    terraform init -reconfigure \
+      -backend-config="bucket=${BUCKET}" \
+      -backend-config="prefix=europe-west1/${STACK}.tfstate" \
+      "$@"
+  fi
+else
+  terraform "$CMD" "$@"
+fi

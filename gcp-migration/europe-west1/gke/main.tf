@@ -36,4 +36,16 @@ module "gke" {
             preemptible  = true
         }
     ]
+
+    cluster_autoscaling = {
+      enabled = true
+      autoscaling_profile = "OPTIMIZE_UTILIZATION"
+      min_cpu_cores = 0
+      max_cpu_cores = 20
+      min_memory_gb = 0
+      max_memory_gb = 64
+      gpu_resources = []
+      auto_repair = true
+      auto_upgrade = true
+    }
 }

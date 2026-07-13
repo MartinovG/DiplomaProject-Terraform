@@ -3,6 +3,10 @@ provider "google" {
   region  = var.region
 }
 
+data "google_project" "this" {
+  project_id = var.project_id
+}
+
 module "artifact_registry" {
   source  = "GoogleCloudPlatform/artifact-registry/google"
   version = "~> 0.8"
@@ -47,6 +51,7 @@ module "artifact_registry" {
 
 members = {
   writers = [module.github_ci_sa.iam_email]
+  readers = ["serviceAccount:${data.google_project.this.number}-compute@developer.gserviceaccount.com"]
 }
 
 }
